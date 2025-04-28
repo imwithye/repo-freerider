@@ -24,7 +24,7 @@ async function freeriderPRs({
 
   const prs = response.data;
   const filteredPrs = prs.filter(
-    (pr) => !authors || authors.includes(pr.user.login),
+    (pr) => !authors || authors.includes(pr.user?.login || ""),
   );
   const checkUpdateStatuses = await Promise.all(
     filteredPrs.map(async (pr) => {
@@ -46,7 +46,7 @@ async function freeriderPRs({
     return {
       number: pr.number,
       url: pr.html_url,
-      author: pr.user.login,
+      author: pr.user?.login || "",
     };
   });
   return output;
