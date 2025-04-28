@@ -1,10 +1,10 @@
 {
-  "name": "git-freerider",
+  "name": "repo-freerider",
   "version": "0.0.1",
   "description": "",
   "type": "module",
   "bin": {
-    "git-freerider": "dist/index.js"
+    "repo-freerider": "dist/index.js"
   },
   "files": [
     "dist",
