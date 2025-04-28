@@ -7,7 +7,7 @@ async function freeriderPRs({
 }: {
   owner: string;
   repo: string;
-  authors: string[];
+  authors?: string[];
 }) {
   const octokit = new Octokit({
     auth: process.env.GITHUB_TOKEN || "",
@@ -55,11 +55,18 @@ async function freeriderPRs({
 // Example usage
 async function main() {
   try {
+    // Parse command line arguments
+    const args = process.argv.slice(2);
+    if (!args[0] || args[0].split("/").length !== 2) {
+      console.error("Usage: freerider <owner>/<repo>");
+      process.exit(1);
+    }
+    const [owner, repo] = args[0].split("/");
+
     var table = new Table({ head: ["Number", "Author", "URL"] });
     const prs = await freeriderPRs({
-      owner: "akuityio",
-      repo: "akuity-platform",
-      authors: ["imwithye", "hwwn", "hanxiaop", "jiachengxu"],
+      owner,
+      repo,
     });
     for (const pr of prs) {
       table.push([`#${pr.number}`, pr.author, pr.url]);
