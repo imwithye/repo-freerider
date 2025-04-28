@@ -55,6 +55,10 @@ async function freeriderPRs({
 // Example usage
 async function main() {
   try {
+    if (!process.env.GITHUB_TOKEN) {
+      console.error("GITHUB_TOKEN is not set");
+      process.exit(1);
+    }
     // Parse command line arguments
     const args = process.argv.slice(2);
     if (!args[0] || args[0].split("/").length !== 2) {
@@ -74,6 +78,7 @@ async function main() {
     console.log(table.toString());
   } catch (error) {
     console.error("Error:", error);
+    process.exit(1);
   }
 }
 
