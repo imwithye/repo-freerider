@@ -5,13 +5,15 @@
   "type": "module",
   "main": "index.ts",
   "scripts": {
-    "start": "ts-node src/index.ts"
+    "start": "NODE_NO_WARNINGS=1 ts-node src/index.ts",
+    "format": "prettier --write ."
   },
   "keywords": [],
   "author": "Yiwei Gong",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^22.15.2",
+    "prettier": "3.5.3",
     "ts-node": "^10.9.2"
   },
   "dependencies": {
