@@ -17,6 +17,7 @@
     "ts-node": "^10.9.2"
   },
   "dependencies": {
+    "cli-table": "^0.3.11",
     "octokit": "^4.1.3"
   }
 }

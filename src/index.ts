@@ -1,5 +1,5 @@
 import { Octokit } from "octokit";
-
+import Table from "cli-table";
 async function freeriderPRs({
   owner,
   repo,
@@ -44,6 +44,7 @@ async function freeriderPRs({
   const needsUpdatePrs = checkUpdateStatuses.filter((pr) => pr.needsUpdate);
   const output = needsUpdatePrs.map((pr) => {
     return {
+      number: pr.number,
       url: pr.html_url,
       author: pr.user.login,
     };
@@ -54,12 +55,16 @@ async function freeriderPRs({
 // Example usage
 async function main() {
   try {
+    var table = new Table({ head: ["Number", "Author", "URL"] });
     const prs = await freeriderPRs({
       owner: "akuityio",
       repo: "akuity-platform",
       authors: ["imwithye", "hwwn", "hanxiaop", "jiachengxu"],
     });
-    console.log("Pull Requests:", prs);
+    for (const pr of prs) {
+      table.push([`#${pr.number}`, pr.author, pr.url]);
+    }
+    console.log(table.toString());
   } catch (error) {
     console.error("Error:", error);
   }
