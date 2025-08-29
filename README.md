@@ -6,5 +6,5 @@ A command-line tool to help you identify GitHub Pull Requests that need to be up
 
 ```
 export GITHUB_TOKEN=<token>
-npx freerider <owner>/<repo>
+pnpm start <owner>/<repo>
 ```
